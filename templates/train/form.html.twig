@@ -1,0 +1,56 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Wagons Create{% endblock %}
+
+{% block body %}
+    <h3 class="text-center">Create Wagon</h3>
+    <form name="train-create" method="post">
+        <div class="form-group">
+            <label for="trainName">Name</label>
+            <input type="text" class="form-control" id="trainName" name="name" placeholder="Enter train name">
+        </div>
+        <div class="form-group">
+            <label for="locomotives">Locomotives</label>
+            {% for locomotive in locomotives %}
+                <div class="form-check">
+                    <input
+                            class="form-check-input"
+                            type="checkbox"
+                            value="{{ locomotive.id }}"
+                            id="locomotives"
+                            name="locomotives[]"
+                            {% if locomotive.elementConnector %}disabled{% endif %}
+                    >
+                    <label class="form-check-label" for="locomotives">
+                        {{ locomotive.type.value }} - {{ locomotive.manufacturer }} - {{ locomotive.serialNo }}
+                        {% if locomotive.elementConnector %}
+                            (used in locomotive.elementConnector.train.name)
+                        {% endif %}
+                    </label>
+                </div>
+            {% endfor %}
+        </div>
+        <div class="form-group">
+            <label for="locomotives">Wagons</label>
+            {% for wagon in wagons %}
+                <div class="form-check">
+                    <input
+                            class="form-check-input"
+                            type="checkbox"
+                            value="{{ wagon.id }}"
+                            id="wagons"
+                            name="wagons[]"
+                            {% if wagon.elementConnector %}disabled{% endif %}
+                    >
+                    <label class="form-check-label" for="wagons">
+                        {{ wagon.type.value }} - {{ wagon.manufacturer }} - {{ wagon.serialNo }}
+                        {% if wagon.elementConnector %}
+                            (used in wagon.elementConnector.train.name)
+                        {% endif %}
+                    </label>
+                </div>
+            {% endfor %}
+        </div>
+        <button type="submit" id="train_Save" name="save" class="btn btn-primary">Submit</button>
+    </form>
+{% endblock %}

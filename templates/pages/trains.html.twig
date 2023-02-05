@@ -9,17 +9,21 @@
             <tr>
                 <th scope="col">#</th>
                 <th scope="col">Name</th>
-                <th scope="col">Locomotives</th>
-                <th scope="col">Wagons</th>
+                <th scope="col">Number of Coaches</th>
+                <th scope="col">Actions</th>
             </tr>
             </thead>
             <tbody>
-            <tr>
-                <th scope="row">1</th>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
+            {% for train in trains %}
+                <tr>
+                    <th scope="row">{{ loop.index }}</th>
+                    <td>{{ train.name }}</td>
+                    <td>{{ train.elements.count }}</td>
+                    <td>
+                        <a href="{{ path('trains_show', {id: train.id}) }}" >Show</a>
+                    </td>
+                </tr>
+            {% endfor %}
             </tbody>
         </table>
     {% else %}

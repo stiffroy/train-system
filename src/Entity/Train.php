@@ -18,7 +18,7 @@ class Train
     #[ORM\Column(length: 255)]
     private ?string $name = null;
 
-    #[ORM\OneToMany(mappedBy: 'train', targetEntity: ElementConnector::class)]
+    #[ORM\OneToMany(mappedBy: 'train', targetEntity: ElementConnector::class, cascade: ['persist'])]
     private Collection $elements;
 
     public function __construct()
