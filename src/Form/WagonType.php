@@ -22,7 +22,7 @@ class WagonType extends AbstractType
             ->add('weight')
             ->add('length')
             ->add('maxPassenger')
-            ->add('maxPayload')
+            ->add('maxGoodsWeight')
             ->add('manufacturer')
             ->add('yearOfManufacture', DateType::class, [
                 'widget' => 'single_text',

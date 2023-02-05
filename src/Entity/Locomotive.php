@@ -19,6 +19,9 @@ class Locomotive implements CoachInterface
     #[ORM\Column]
     private ?int $pullingPower = null;
 
+    #[ORM\Column]
+    private int $maxPayload = 0;
+
     #[ORM\Column(type: 'string', enumType: PropulsionType::class)]
     private PropulsionType|null $type = null;
 
@@ -38,6 +41,18 @@ class Locomotive implements CoachInterface
     public function setPullingPower(int $pullingPower): self
     {
         $this->pullingPower = $pullingPower;
+
+        return $this;
+    }
+
+    public function getMaxPayload(): int
+    {
+        return $this->maxPayload;
+    }
+
+    public function setMaxPayload(int $maxPayload): self
+    {
+        $this->maxPayload = $maxPayload;
 
         return $this;
     }

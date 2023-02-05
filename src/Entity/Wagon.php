@@ -22,6 +22,9 @@ class Wagon implements CoachInterface
     #[ORM\OneToOne(mappedBy: 'wagon', cascade: ['persist', 'remove'])]
     private ?ElementConnector $elementConnector = null;
 
+    #[ORM\Column]
+    private ?float $maxGoodsWeight = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -57,6 +60,18 @@ class Wagon implements CoachInterface
         }
 
         $this->elementConnector = $elementConnector;
+
+        return $this;
+    }
+
+    public function getMaxGoodsWeight(): ?float
+    {
+        return $this->maxGoodsWeight;
+    }
+
+    public function setMaxGoodsWeight(float $maxGoodsWeight): self
+    {
+        $this->maxGoodsWeight = $maxGoodsWeight;
 
         return $this;
     }
