@@ -44,6 +44,30 @@ class TrainService
         return $train;
     }
 
+    public function saveChangesToTrain(Train $train, array $data): Train
+    {
+        if ($train->getName() !== $data['name']) {
+            $train->setName($data['name']);
+        }
+
+        foreach ($train->getElements() as $element) {
+            if (array_key_exists($element->getId(), $data['elements'])) {
+                $elementValue = $data['elements'][$element->getId()];
+                if (0 === $elementValue) {
+                    $train->removeElement($element);
+                } else {
+                    $element->setElementOrder($elementValue);
+                }
+            } else {
+                $train->removeElement($element);
+            }
+        }
+
+        $this->trainRepository->save($train, true);
+
+        return $train;
+    }
+
     private function createLocomotiveConnector(int $locomotiveId, int $order): ElementConnector
     {
         $connector = new ElementConnector();

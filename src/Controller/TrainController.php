@@ -28,7 +28,7 @@ class TrainController extends AbstractController
         LocomotiveRepository $locomotiveRepository,
         WagonRepository $wagonRepository
     ): Response {
-        if ($request->request->has('save')) {
+        if ($request->request->has('save') && '_create' === $request->request->get('save')) {
             $trainService->createTrain($request->request->all());
 
             return $this->redirectToRoute('trains_list');
@@ -37,6 +37,22 @@ class TrainController extends AbstractController
         return $this->render('train/form.html.twig', [
             'locomotives' => $locomotiveRepository->findAll(),
             'wagons' => $wagonRepository->findAll(),
+        ]);
+    }
+
+
+    #[Route('trains/edit/{id}', name: 'trains_edit', requirements: ['id' => '\d+'])]
+    public function edit(
+        Train $train,
+        Request $request,
+        TrainService $trainService
+    ): Response {
+        if ($request->request->has('save') && '_edit' === $request->request->get('save')) {
+            $train = $trainService->saveChangesToTrain($train, $request->request->all());
+        }
+
+        return $this->render('train/edit.html.twig', [
+            'train' => $train,
         ]);
     }
 }

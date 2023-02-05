@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Trains Edit{% endblock %}
+
+{% block body %}
+    <h3 class="text-center">Edit Train</h3>
+    <form name="train-create" method="post">
+        <div class="form-group">
+            <label for="trainName">Name</label>
+            <input type="text" class="form-control" id="trainName" name="name" placeholder="Enter train name" value="{{ train.name }}">
+        </div>
+        <div class="form-group mt-3">
+            <label for="elements">Coaches</label>
+            {% for element in train.elements %}
+                <div class="input-group mb-3">
+                    <input
+                            type="text"
+                            class="form-control"
+                            id="elements[{{ element.id }}]"
+                            name="elements[{{ element.id }}]"
+                            placeholder="Enter the order number (0 or blank to remove)"
+                            value="{{ element.elementOrder }}"
+                            aria-label="Enter the order number"
+                            aria-describedby="elementName"
+                    >
+                    <span class="input-group-text" id="elementName">
+                        {{ element.element.type.value }} - {{ element.element.manufacturer }}- {{ element.element.serialNo }}
+                    </span>
+                </div>
+            {% endfor %}
+        </div>
+        <button type="submit" id="train_Save" name="save" class="btn btn-primary" value="_edit">Submit</button>
+    </form>
+{% endblock %}

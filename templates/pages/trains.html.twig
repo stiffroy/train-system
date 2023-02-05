@@ -21,6 +21,7 @@
                     <td>{{ train.elements.count }}</td>
                     <td>
                         <a href="{{ path('trains_show', {id: train.id}) }}" >Show</a>
+                        <a href="{{ path('trains_edit', {id: train.id}) }}" >Edit</a>
                     </td>
                 </tr>
             {% endfor %}
