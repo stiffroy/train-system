@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Trains List{% endblock %}
+
+{% block body %}
+    {% if wagons %}
+        <table class="table">
+            <thead class="thead-dark">
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Serial No</th>
+                <th scope="col">Manufacturer</th>
+                <th scope="col">Type</th>
+                <th scope="col">Max Passenger</th>
+                <th scope="col">Max Payload</th>
+                <th scope="col">Length</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for wagon in wagons %}
+                <tr>
+                    <th scope="row">{{ loop.index }}</th>
+                    <td>{{ wagon.serialNo }}</td>
+                    <td>{{ wagon.manufacturer }}</td>
+                    <td>{{ wagon.type.value }}</td>
+                    <td>{{ wagon.maxPessenger }}</td>
+                    <td>{{ wagon.maxPayload }}</td>
+                    <td>{{ wagon.length }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <h3 class="text-center">Sorry, no wagon found</h3>
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Trains List{% endblock %}
+
+{% block body %}
+    {% if trains %}
+        <table class="table">
+            <thead class="thead-dark">
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Name</th>
+                <th scope="col">Locomotives</th>
+                <th scope="col">Wagons</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <th scope="row">1</th>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            </tbody>
+        </table>
+    {% else %}
+        <h3 class="text-center">Sorry, no train found</h3>
+    {% endif %}
+{% endblock %}
