@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Train;
 use App\Repository\LocomotiveRepository;
 use App\Repository\WagonRepository;
+use App\Service\TrainInfoService;
 use App\Service\TrainService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -14,10 +15,11 @@ use Symfony\Component\Routing\Annotation\Route;
 class TrainController extends AbstractController
 {
     #[Route('trains/{id}', name: 'trains_show', requirements: ['id' => '\d+'])]
-    public function show(Train $train): Response
+    public function show(Train $train, TrainInfoService $trainInfoService): Response
     {
         return $this->render('train/show.html.twig', [
             'train' => $train,
+            'extraInfo' => $trainInfoService->getTrainInfo($train),
         ]);
     }
 

@@ -3,7 +3,21 @@
 {% block title %}Trains Show{% endblock %}
 
 {% block body %}
-    <h3 class="text-center">Train details for</h3>
+    <h3 class="text-center">Train details</h3>
+    <h4 class="text-center">{{ train.name }}</h4>
 
-    {{ dump(train) }}
+    <br />
+
+    <table class="table table-hover">
+        <thead>
+        </thead>
+        <tbody>
+        {% for key, element in extraInfo %}
+            <tr>
+                <th scope="row">{{ key }}</th>
+                <td>{{ element }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
 {% endblock %}
