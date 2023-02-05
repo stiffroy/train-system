@@ -7,7 +7,7 @@ use App\Repository\LocomotiveRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: LocomotiveRepository::class)]
-class Locomotive
+class Locomotive implements CoachInterface
 {
     use BaseCoach;
 
@@ -21,6 +21,9 @@ class Locomotive
 
     #[ORM\Column(type: 'string', enumType: PropulsionType::class)]
     private PropulsionType|null $type = null;
+
+    #[ORM\OneToOne(mappedBy: 'locomotive', cascade: ['persist', 'remove'])]
+    private ?ElementConnector $elementConnector = null;
 
     public function getId(): ?int
     {
@@ -47,6 +50,28 @@ class Locomotive
     public function setType(PropulsionType $type): self
     {
         $this->type = $type;
+
+        return $this;
+    }
+
+    public function getElementConnector(): ?ElementConnector
+    {
+        return $this->elementConnector;
+    }
+
+    public function setElementConnector(?ElementConnector $elementConnector): self
+    {
+        // unset the owning side of the relation if necessary
+        if ($elementConnector === null && $this->elementConnector !== null) {
+            $this->elementConnector->setLocomotive(null);
+        }
+
+        // set the owning side of the relation if necessary
+        if ($elementConnector !== null && $elementConnector->getLocomotive() !== $this) {
+            $elementConnector->setLocomotive($this);
+        }
+
+        $this->elementConnector = $elementConnector;
 
         return $this;
     }

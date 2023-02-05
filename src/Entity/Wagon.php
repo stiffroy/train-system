@@ -7,7 +7,7 @@ use App\Repository\WagonRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: WagonRepository::class)]
-class Wagon
+class Wagon implements CoachInterface
 {
     use BaseCoach;
 
@@ -18,6 +18,9 @@ class Wagon
 
     #[ORM\Column(type: 'string', enumType: WagonType::class)]
     private ?WagonType $type = null;
+
+    #[ORM\OneToOne(mappedBy: 'wagon', cascade: ['persist', 'remove'])]
+    private ?ElementConnector $elementConnector = null;
 
     public function getId(): ?int
     {
@@ -32,6 +35,28 @@ class Wagon
     public function setType(WagonType $type): self
     {
         $this->type = $type;
+
+        return $this;
+    }
+
+    public function getElementConnector(): ?ElementConnector
+    {
+        return $this->elementConnector;
+    }
+
+    public function setElementConnector(?ElementConnector $elementConnector): self
+    {
+        // unset the owning side of the relation if necessary
+        if ($elementConnector === null && $this->elementConnector !== null) {
+            $this->elementConnector->setWagon(null);
+        }
+
+        // set the owning side of the relation if necessary
+        if ($elementConnector !== null && $elementConnector->getWagon() !== $this) {
+            $elementConnector->setWagon($this);
+        }
+
+        $this->elementConnector = $elementConnector;
 
         return $this;
     }
