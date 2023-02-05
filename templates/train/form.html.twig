@@ -24,7 +24,7 @@
                     <label class="form-check-label" for="locomotives">
                         {{ locomotive.type.value }} - {{ locomotive.manufacturer }} - {{ locomotive.serialNo }}
                         {% if locomotive.elementConnector %}
-                            (used in locomotive.elementConnector.train.name)
+                            (used in {{ locomotive.elementConnector.train.name }})
                         {% endif %}
                     </label>
                 </div>
@@ -45,7 +45,7 @@
                     <label class="form-check-label" for="wagons">
                         {{ wagon.type.value }} - {{ wagon.manufacturer }} - {{ wagon.serialNo }}
                         {% if wagon.elementConnector %}
-                            (used in wagon.elementConnector.train.name)
+                            (used in {{ wagon.elementConnector.train.name }})
                         {% endif %}
                     </label>
                 </div>
