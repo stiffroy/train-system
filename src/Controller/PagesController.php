@@ -17,7 +17,7 @@ class PagesController extends AbstractController
         return $this->render('pages/dashboard.html.twig');
     }
 
-    #[Route('/trains', name: 'trains-list')]
+    #[Route('/trains', name: 'trains_list')]
     public function trainList(TrainRepository $repository): Response
     {
         return $this->render('pages/trains.html.twig', [
@@ -25,19 +25,21 @@ class PagesController extends AbstractController
         ]);
     }
 
-    #[Route('/locomotives', name: 'locomotives-list')]
+    #[Route('/locomotives', name: 'locomotives_list')]
     public function locomotiveList(LocomotiveRepository $repository): Response
     {
-        return $this->render('pages/dashboard.html.twig', [
-            'locomotives' => $repository->findAll(),
+        $locomotives = $repository->findAll();
+
+        return $this->render('pages/locomotives.html.twig', [
+            'locomotives' => $locomotives,
         ]);
     }
 
-    #[Route('/wagons', name: 'wagons-list')]
+    #[Route('/wagons', name: 'wagons_list')]
     public function wagonList(WagonRepository $repository): Response
     {
-        return $this->render('pages/dashboard.html.twig', [
-            'locomotives' => $repository->findAll(),
+        return $this->render('pages/wagons.html.twig', [
+            'wagons' => $repository->findAll(),
         ]);
     }
 }
