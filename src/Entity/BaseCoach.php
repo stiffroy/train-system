@@ -17,9 +17,6 @@ trait BaseCoach
     private int $maxPassenger = 0;
 
     #[ORM\Column]
-    private int $maxPayload = 0;
-
-    #[ORM\Column]
     private ?string $manufacturer = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
@@ -60,18 +57,6 @@ trait BaseCoach
     public function setMaxPassenger(int $maxPassenger): self
     {
         $this->maxPassenger = $maxPassenger;
-
-        return $this;
-    }
-
-    public function getMaxPayload(): int
-    {
-        return $this->maxPayload;
-    }
-
-    public function setMaxPayload(int $maxPayload): self
-    {
-        $this->maxPayload = $maxPayload;
 
         return $this;
     }
