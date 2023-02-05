@@ -5,8 +5,17 @@
 {% block body %}
     <h3 class="text-center">Train details</h3>
     <h4 class="text-center">{{ train.name }}</h4>
-
     <br />
+
+    <ul class="list-group list-group-horizontal">
+        {% for connector in train.elements %}
+            {% if connector.locomotive %}
+                <li class="text-bg-success list-group-item mr5">{{ connector.locomotive.serialNo }}</li>
+            {% elseif connector.wagon %}
+                <li class="text-bg-warning list-group-item mr5">{{ connector.wagon.serialNo }}</li>
+            {% endif %}
+        {% endfor %}
+    </ul>
 
     <table class="table table-hover">
         <thead>
