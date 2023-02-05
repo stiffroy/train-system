@@ -15,6 +15,7 @@
                 <th scope="col">Max Passenger</th>
                 <th scope="col">Max Payload</th>
                 <th scope="col">Length</th>
+                <th scope="col">Actions</th>
             </tr>
             </thead>
             <tbody>
@@ -23,11 +24,14 @@
                     <th scope="row">{{ loop.index }}</th>
                     <td>{{ locomotive.serialNo }}</td>
                     <td>{{ locomotive.manufacturer }}</td>
-                    <td>{{ locomotive.propulsionType.value }}</td>
+                    <td>{{ locomotive.type.value }}</td>
                     <td>{{ locomotive.pullingPower }}</td>
-                    <td>{{ locomotive.maxPessenger }}</td>
+                    <td>{{ locomotive.maxPassenger }}</td>
                     <td>{{ locomotive.maxPayload }}</td>
                     <td>{{ locomotive.length }}</td>
+                    <td>
+                        <a href="{{ path('locomotives_show', {id: locomotive.id}) }}" >Show</a>
+                    </td>
                 </tr>
             {% endfor %}
             </tbody>
