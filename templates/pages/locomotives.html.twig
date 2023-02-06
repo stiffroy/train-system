@@ -3,6 +3,9 @@
 {% block title %}Locomotives List{% endblock %}
 
 {% block body %}
+    <div class="float-end">
+        <a href="{{ path('locomotives_create') }}">Create New</a>
+    </div>
     {% if locomotives %}
         <table class="table">
             <thead class="thead-dark">

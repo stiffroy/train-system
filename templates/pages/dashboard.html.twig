@@ -3,5 +3,15 @@
 {% block title %}Dashboard{% endblock %}
 
 {% block body %}
-
+    <div class="text-center">
+        <h1>
+            <a href="{{ path('trains_list') }}">Trains</a>
+        </h1>
+        <h1>
+            <a href="{{ path('locomotives_list') }}">Locomotives</a>
+        </h1>
+        <h1>
+            <a href="{{ path('wagons_list') }}">Wagons</a>
+        </h1>
+    </div>
 {% endblock %}

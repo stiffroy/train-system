@@ -3,6 +3,9 @@
 {% block title %}Trains List{% endblock %}
 
 {% block body %}
+    <div class="float-end">
+        <a href="{{ path('trains_create') }}">Create New</a>
+    </div>
     {% if trains %}
         <table class="table">
             <thead class="thead-dark">
