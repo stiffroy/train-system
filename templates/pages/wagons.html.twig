@@ -4,6 +4,9 @@
 
 {% block body %}
     {% if wagons %}
+        <div class="float-end">
+            <a href="{{ path('wagons_create') }}">Create New</a>
+        </div>
         <table class="table">
             <thead class="thead-dark">
             <tr>
@@ -12,7 +15,7 @@
                 <th scope="col">Manufacturer</th>
                 <th scope="col">Type</th>
                 <th scope="col">Max Passenger</th>
-                <th scope="col">Max Payload</th>
+                <th scope="col">Max Goods Weight</th>
                 <th scope="col">Length</th>
                 <th scope="col">Actions</th>
             </tr>
@@ -25,7 +28,7 @@
                     <td>{{ wagon.manufacturer }}</td>
                     <td>{{ wagon.type.value }}</td>
                     <td>{{ wagon.maxPassenger }}</td>
-                    <td>{{ wagon.maxPayload }}</td>
+                    <td>{{ wagon.maxGoodsWeight }}</td>
                     <td>{{ wagon.length }}</td>
                     <td>
                         <a href="{{ path('wagons_show', {id: wagon.id}) }}" >Show</a>
